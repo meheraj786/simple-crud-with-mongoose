@@ -1,25 +1,3 @@
-// let Dev = [
-//   {
-//     id: 1,
-//     name: "Darnell Marquardt",
-//     email: "Braden_Block@gmail.com",
-//   },
-//   {
-//     id: 2,
-//     name: "Darnell Marquardt",
-//     email: "Marquardt@gmail.com",
-//   },
-//   {
-//     id: 3,
-//     name: "Darnell Victoria ",
-//     email: "Darnell@gmail.com",
-//   },
-//   {
-//     id: 4,
-//     name: "Victoria  Marquardt",
-//     email: "Victoria@gmail.com",
-//   },
-// ];
 const Dev = require("../models/Dev");
 
 // get all user
@@ -71,10 +49,10 @@ let createUser = async (req, res) => {
 };
 
 // update a user
-let editUser = async(req, res) => {
+let editUser = async (req, res) => {
   const { id } = req.params;
-try {
-    const dev = await Dev.findByIdAndUpdate(id,req.body);
+  try {
+    const dev = await Dev.findByIdAndUpdate(id, req.body);
     res.json({
       status: true,
       dev,
@@ -85,11 +63,11 @@ try {
 };
 
 // delete a user
-let deteleUser = async(req, res) => {
+let deteleUser = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const dev = await Dev.findByIdAndDelete(id,req);
+    const dev = await Dev.findByIdAndDelete(id, req);
     res.json({
       status: true,
       dev,

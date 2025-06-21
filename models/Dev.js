@@ -1,8 +1,8 @@
-const mongoose= require('mongoose')
+const mongoose = require("mongoose");
 
-const Schema= mongoose.Schema;
+const Schema = mongoose.Schema;
 
-const DevSchema= new Schema({
+const DevSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -11,12 +11,10 @@ const DevSchema= new Schema({
   email: {
     type: String,
     required: true,
-    trim: true
-  }
-})
+    trim: true,
+  },
+});
 
+const Dev = mongoose.model("dev", DevSchema);
 
-const Dev= mongoose.model("dev", DevSchema)
-
-
-module.exports= Dev
+module.exports = Dev;

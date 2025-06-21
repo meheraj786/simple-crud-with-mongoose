@@ -20,10 +20,9 @@
 //     email: "Victoria@gmail.com",
 //   },
 // ];
-const Dev= require('../models/Dev')
+const Dev = require("../models/Dev");
 
-
-// get all user 
+// get all user
 let getAllUser = async (req, res) => {
   try {
     const allUsers = await Dev.find();
@@ -41,25 +40,21 @@ let getAllUser = async (req, res) => {
   }
 };
 
-
 // get a single user
-let getSingleUser= (req, res) => {
+let getSingleUser = async (req, res) => {
   const { id } = req.params;
-  let user;
-  for (let i = 0; i < Dev.length; i++) {
-    if (Dev[i].id == id) {
-      user = Dev[i];
-      break;
-    }
+  try {
+    const dev = await Dev.findById(id);
+    res.json({
+      status: true,
+      dev,
+    });
+  } catch (err) {
+    console.log(err);
   }
-  res.json({
-    status: true,
-    user,
-  });
-}
+};
 
-
-// create a user 
+// create a user
 let createUser = async (req, res) => {
   try {
     const { name, email } = req.body;
@@ -75,8 +70,8 @@ let createUser = async (req, res) => {
   }
 };
 
-// edit a user 
-let editUser=(req, res) => {
+// edit a user
+let editUser = (req, res) => {
   const { id } = req.params;
   Dev.map((user) => {
     if (user.id == id) {
@@ -87,10 +82,10 @@ let editUser=(req, res) => {
     status: "User is Update",
     Dev,
   });
-}
+};
 
-// delete a user 
-let deteleUser=(req, res) => {
+// delete a user
+let deteleUser = (req, res) => {
   const { id } = req.params;
 
   Dev = Dev.filter((user) => user.id != id);
@@ -98,13 +93,12 @@ let deteleUser=(req, res) => {
     status: true,
     Dev,
   });
-}
+};
 
-
-module.exports={
+module.exports = {
   getAllUser,
   getSingleUser,
   createUser,
   editUser,
-  deteleUser
-}
+  deteleUser,
+};

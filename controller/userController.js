@@ -70,29 +70,33 @@ let createUser = async (req, res) => {
   }
 };
 
-// edit a user
-let editUser = (req, res) => {
+// update a user
+let editUser = async(req, res) => {
   const { id } = req.params;
-  Dev.map((user) => {
-    if (user.id == id) {
-      user.email = req.body.email;
-    }
-  });
-  res.json({
-    status: "User is Update",
-    Dev,
-  });
+try {
+    const dev = await Dev.findByIdAndUpdate(id,req.body);
+    res.json({
+      status: true,
+      dev,
+    });
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 // delete a user
-let deteleUser = (req, res) => {
+let deteleUser = async(req, res) => {
   const { id } = req.params;
 
-  Dev = Dev.filter((user) => user.id != id);
-  res.json({
-    status: true,
-    Dev,
-  });
+  try {
+    const dev = await Dev.findByIdAndDelete(id,req);
+    res.json({
+      status: true,
+      dev,
+    });
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 module.exports = {
